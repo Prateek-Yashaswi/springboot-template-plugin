@@ -6,7 +6,7 @@ import exceptions.ProcessingException;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
 import model.BasicProjectDetails;
-import model.enums.Templates;
+import enums.Templates;
 
 import java.io.FileWriter;
 import java.io.IOException;

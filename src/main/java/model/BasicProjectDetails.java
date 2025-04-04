@@ -1,6 +1,6 @@
 package model;
 
-import model.enums.ConfigurationType;
+import enums.ConfigurationType;
 
 public record BasicProjectDetails(String springVersion,
                                   String projectName,

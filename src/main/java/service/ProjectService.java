@@ -4,7 +4,7 @@ import helper.ClassCreator;
 import helper.ConfigCreator;
 import helper.PomCreator;
 import model.BasicProjectDetails;
-import model.enums.Templates;
+import enums.Templates;
 import org.apache.maven.plugin.MojoExecutionException;
 
 import java.io.IOException;
@@ -25,9 +25,9 @@ public class ProjectService {
         var packagePath = basicProjectDetails.packageName().replace('.', '/');
 
         try {
-            var javaPath = projectPath.resolve(SRC + MAIN + JAVA + "/" + packagePath);
+            var javaPath = projectPath.resolve(SRC + MAIN + JAVA + FWD_SLASH + packagePath);
             var resourcesPath = projectPath.resolve(SRC + MAIN + RESOURCES);
-            var testPath = projectPath.resolve(SRC + TEST + JAVA + "/" + packagePath);
+            var testPath = projectPath.resolve(SRC + TEST + JAVA + FWD_SLASH + packagePath);
 
             Files.createDirectories(javaPath);
             Files.createDirectories(resourcesPath);

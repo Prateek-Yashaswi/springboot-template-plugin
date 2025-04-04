@@ -2,8 +2,8 @@ package mojos;
 
 
 import model.BasicProjectDetails;
-import model.enums.ConfigurationType;
-import model.enums.Templates;
+import enums.ConfigurationType;
+import enums.Templates;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -11,6 +11,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import service.ProjectService;
 
+@SuppressWarnings("unused")
 @Mojo(name = "generate", defaultPhase = LifecyclePhase.INSTALL, requiresProject = false)
 public class GenerateProject extends AbstractMojo {
 
