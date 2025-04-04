@@ -1,0 +1,1 @@
+mvn spring.template:springboot-template-plugin:1.0-SNAPSHOT:generate -DprojectName=demo -DgroupId=com.example -DartifactId=demo -DpackageName=com.example.demo -DspringVersion=3.2.0 -DapplicationConfigType=YAML
