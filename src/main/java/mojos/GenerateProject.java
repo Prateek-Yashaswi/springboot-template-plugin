@@ -1,15 +1,16 @@
 package mojos;
 
 
-import model.BasicProjectDetails;
 import enums.ConfigurationType;
 import enums.Templates;
+import model.BasicProjectDetails;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import service.ProjectService;
+import validations.Validations;
 
 @SuppressWarnings("unused")
 @Mojo(name = "generate", defaultPhase = LifecyclePhase.INSTALL, requiresProject = false)
@@ -34,7 +35,7 @@ public class GenerateProject extends AbstractMojo {
     private String packageName;
 
     @Parameter(property = "javaVersion", defaultValue = "17")
-    private Integer javaVersion;
+    private String javaVersion;
 
     @Parameter(property = "configurationType", defaultValue = "YAML")
     private ConfigurationType configurationType;
@@ -43,6 +44,10 @@ public class GenerateProject extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException {
+
+        BasicProjectDetails basicProjectDetails = new BasicProjectDetails(springVersion, projectName, groupId, artifactId, packageName, javaVersion, configurationType);
+        Validations.getInstance().validate(basicProjectDetails);
+
         getLog().info("Generating Spring Boot Project: " + projectName);
         getLog().info("Using Template: " + template);
         getLog().info("Group ID: " + groupId);
@@ -51,8 +56,6 @@ public class GenerateProject extends AbstractMojo {
         getLog().info("Package Name: " + packageName);
         getLog().info("Java Version: " + javaVersion);
         getLog().info("Generating application config file as: application." + configurationType.getExtension());
-
-        BasicProjectDetails basicProjectDetails = new BasicProjectDetails(springVersion, projectName, groupId, artifactId, packageName, javaVersion, configurationType);
 
         projectService.createProjectStructure(basicProjectDetails, template);
     }

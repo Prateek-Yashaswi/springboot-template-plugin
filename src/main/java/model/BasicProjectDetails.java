@@ -7,6 +7,6 @@ public record BasicProjectDetails(String springVersion,
                                   String groupId,
                                   String artifactId,
                                   String packageName,
-                                  Integer javaVersion,
+                                  String javaVersion,
                                   ConfigurationType configurationType) {
 }
