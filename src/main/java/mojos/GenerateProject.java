@@ -54,6 +54,6 @@ public class GenerateProject extends AbstractMojo {
 
         BasicProjectDetails basicProjectDetails = new BasicProjectDetails(springVersion, projectName, groupId, artifactId, packageName, javaVersion, configurationType);
 
-        projectService.createDefaultProjectStructure(basicProjectDetails, template);
+        projectService.createProjectStructure(basicProjectDetails, template);
     }
 }

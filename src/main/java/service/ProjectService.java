@@ -1,10 +1,10 @@
 package service;
 
+import enums.Templates;
 import helper.ClassCreator;
 import helper.ConfigCreator;
 import helper.PomCreator;
 import model.BasicProjectDetails;
-import enums.Templates;
 import org.apache.maven.plugin.MojoExecutionException;
 
 import java.io.IOException;
@@ -20,8 +20,13 @@ public class ProjectService {
     private static final String POM = "pom.xml";
 
 
-    public void createDefaultProjectStructure(BasicProjectDetails basicProjectDetails, Templates template) throws MojoExecutionException {
+    public void createProjectStructure(BasicProjectDetails basicProjectDetails, Templates template) throws MojoExecutionException {
         var projectPath = Path.of(basicProjectDetails.projectName());
+
+        if (Files.exists(projectPath)) {
+            throw new MojoExecutionException("Project '" + basicProjectDetails.projectName() + "' already exists!");
+        }
+
         var packagePath = basicProjectDetails.packageName().replace('.', '/');
 
         try {
