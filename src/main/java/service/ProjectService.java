@@ -40,7 +40,7 @@ public class ProjectService {
 
             var pomFile = projectPath.resolve(POM);
             PomCreator.getInstance().parsePomTemplates(basicProjectDetails, pomFile, template);
-            ConfigCreator.getInstance().createApplicationConfigFile(basicProjectDetails.configurationType().getExtension(), projectPath);
+            ConfigCreator.getInstance().createApplicationConfigFile(basicProjectDetails, projectPath);
             ClassCreator.getInstance().generateMainClass(basicProjectDetails, javaPath);
 
         } catch (IOException e) {
