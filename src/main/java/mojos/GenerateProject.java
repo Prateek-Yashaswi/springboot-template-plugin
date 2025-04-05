@@ -1,6 +1,7 @@
 package mojos;
 
 
+import enums.Choice;
 import enums.ConfigurationType;
 import enums.Templates;
 import model.BasicProjectDetails;
@@ -40,6 +41,9 @@ public class GenerateProject extends AbstractMojo {
     @Parameter(property = "configurationType", defaultValue = "YAML")
     private ConfigurationType configurationType;
 
+    @Parameter(property = "createDockerfile", defaultValue = "N")
+    private Choice createDockerfile;
+
     private final ProjectService projectService = new ProjectService();
 
     @Override
@@ -56,7 +60,8 @@ public class GenerateProject extends AbstractMojo {
         getLog().info("Package Name: " + packageName);
         getLog().info("Java Version: " + javaVersion);
         getLog().info("Generating application config file as: application." + configurationType.getExtension());
+        getLog().info("Generating Dockerfile: " + createDockerfile.getValue());
 
-        projectService.createProjectStructure(basicProjectDetails, template);
+        projectService.createProjectStructure(basicProjectDetails, template, createDockerfile);
     }
 }

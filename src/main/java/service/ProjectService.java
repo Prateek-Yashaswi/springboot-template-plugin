@@ -1,8 +1,10 @@
 package service;
 
+import enums.Choice;
 import enums.Templates;
 import helper.ClassCreator;
 import helper.ConfigCreator;
+import helper.DockerfileCreator;
 import helper.PomCreator;
 import model.BasicProjectDetails;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -19,8 +21,10 @@ public class ProjectService {
     private static final String TEST = "/test";
     private static final String POM = "pom.xml";
 
+    private final DockerfileCreator dockerfileCreator = new DockerfileCreator();
 
-    public void createProjectStructure(BasicProjectDetails basicProjectDetails, Templates template) throws MojoExecutionException {
+
+    public void createProjectStructure(BasicProjectDetails basicProjectDetails, Templates template, Choice createDockerFile) throws MojoExecutionException {
         var projectPath = Path.of(basicProjectDetails.projectName());
 
         if (Files.exists(projectPath)) {
@@ -42,6 +46,10 @@ public class ProjectService {
             PomCreator.getInstance().parsePomTemplates(basicProjectDetails, pomFile, template);
             ConfigCreator.getInstance().createApplicationConfigFile(basicProjectDetails, projectPath);
             ClassCreator.getInstance().generateMainClass(basicProjectDetails, javaPath);
+
+            if (createDockerFile.equals(Choice.Y)) {
+                dockerfileCreator.createDockerfile(projectPath, basicProjectDetails);
+            }
 
         } catch (IOException e) {
             throw new MojoExecutionException("Error creating project structure", e);
