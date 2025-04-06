@@ -31,6 +31,24 @@ templates, configurations, and Docker support!
 | `-DConfigurationType` | ❌ No         | Format of application configuration | `YAML`            | `YAML`, `PROPERTIES`            |
 | `-DCreateDockerfile`  | ❌ No         | Whether to generate a `Dockerfile`  | `N`               | `Y`, `N`                        |
 
+### ▶️ To Run This Plugin
+
+**1️⃣ Clone The Repository** 
+
+```bash
+git clone https://github.com/Prateek-Yashaswi/springboot-template-plugin.git
+```
+
+**2️⃣ Navigate Inside The Folder**
+```bash
+cd springboot-template-plugin
+```
+
+**3️⃣ Build The Project**
+```bash
+mvn clean install
+```
+
 ### 📥 Example Usage
 
 ```bash
