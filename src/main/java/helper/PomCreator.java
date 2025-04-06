@@ -2,11 +2,11 @@ package helper;
 
 import config.FreemarkerConfig;
 import constants.FreemarkerConstants;
+import enums.Templates;
 import exceptions.ProcessingException;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
 import model.BasicProjectDetails;
-import enums.Templates;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,6 +17,7 @@ import java.util.Map;
 public class PomCreator {
 
     private static final String DEFAULT_POM_TEMPLATE_NAME = "/default-pom.ftl";
+    private static final String JPA_POM_TEMPLATE_NAME = "/jpa-pom.ftl";
 
     private final Configuration freemarkerConfig = FreemarkerConfig.getConfig();
 
@@ -31,12 +32,12 @@ public class PomCreator {
 
         var dataModel = switch (template) {
             case DEFAULT -> getDefaultTemplateDataModel(basicProjectDetails);
-            case DATABASE -> getDefaultTemplateDataModel(basicProjectDetails);
+            case DATABASE_JPA -> getDatabaseTemplateDataModel(basicProjectDetails);
         };
 
         var templateName = switch (template) {
             case DEFAULT -> DEFAULT_POM_TEMPLATE_NAME;
-            case DATABASE -> "TEST";
+            case DATABASE_JPA -> JPA_POM_TEMPLATE_NAME;
         };
 
         try {
@@ -54,6 +55,10 @@ public class PomCreator {
         addCommonData(freemarkerModel, basicProjectDetails);
 
         return freemarkerModel;
+    }
+
+    private Map<String, Object> getDatabaseTemplateDataModel(BasicProjectDetails basicProjectDetails) {
+        return getDefaultTemplateDataModel(basicProjectDetails);
     }
 
     private void addCommonData(Map<String, Object> freemarkerModel, BasicProjectDetails basicProjectDetails) {

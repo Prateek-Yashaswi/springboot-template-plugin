@@ -2,5 +2,5 @@ package enums;
 
 public enum Templates {
     DEFAULT,
-    DATABASE
+    DATABASE_JPA
 }

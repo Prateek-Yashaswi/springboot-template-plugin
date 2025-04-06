@@ -41,7 +41,7 @@ public class GenerateProject extends AbstractMojo {
     @Parameter(property = "configurationType", defaultValue = "YAML")
     private ConfigurationType configurationType;
 
-    @Parameter(property = "createDockerfile", defaultValue = "N")
+    @Parameter(property = "CreateDockerfile", defaultValue = "N")
     private Choice createDockerfile;
 
     private final ProjectService projectService = new ProjectService();

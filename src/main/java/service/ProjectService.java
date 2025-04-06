@@ -44,7 +44,7 @@ public class ProjectService {
 
             var pomFile = projectPath.resolve(POM);
             PomCreator.getInstance().parsePomTemplates(basicProjectDetails, pomFile, template);
-            ConfigCreator.getInstance().createApplicationConfigFile(basicProjectDetails, projectPath);
+            ConfigCreator.getInstance().createApplicationConfigFile(basicProjectDetails, projectPath, template);
             ClassCreator.getInstance().generateMainClass(basicProjectDetails, javaPath);
 
             if (createDockerFile.equals(Choice.Y)) {
