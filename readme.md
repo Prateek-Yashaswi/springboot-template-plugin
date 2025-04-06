@@ -19,17 +19,17 @@ templates, configurations, and Docker support!
 
 ### ⚙️ Maven Plugin Parameters
 
-| **Parameter**         | **Required** | **Description**                     | **Default Value** | **Possible Values**             |
-|-----------------------|--------------|-------------------------------------|-------------------|---------------------------------|
-| `-DProjectName`       | ✅ Yes        | Name of the Spring Boot project     | –                 | *Any valid string*              |
-| `-DGroupId`           | ✅ Yes        | Maven Group ID                      | –                 | *Any valid string*              |
-| `-DArtifactId`        | ✅ Yes        | Maven Artifact ID                   | –                 | *Any valid string*              |
-| `-DTemplate`          | ❌ No         | Type of project template            | `DEFAULT`         | `DEFAULT`, `DATABASE_JPA`       |
-| `-DSpringVersion`     | ❌ No         | Version of Spring Boot to use       | `3.1.0`           | *Any valid Spring Boot version* |
-| `-DPackageName`       | ❌ No         | Base package for the generated code | `com.example`     | *Any valid Java package name*   |
-| `-DJavaVersion`       | ❌ No         | Java version for the project        | `17`              | `8`, `11`, `17`, `21`           |
-| `-DConfigurationType` | ❌ No         | Format of application configuration | `YAML`            | `YAML`, `PROPERTIES`            |
-| `-DCreateDockerfile`  | ❌ No         | Whether to generate a `Dockerfile`  | `N`               | `Y`, `N`                        |
+| **Parameter**              | **Required** | **Description**                     | **Default Value** | **Possible Values**             |
+|----------------------------|--------------|-------------------------------------|-------------------|---------------------------------|
+| `-DProjectName`            | ✅ Yes        | Name of the Spring Boot project     | –                 | *Any valid string*              |
+| `-DGroupId`                | ✅ Yes        | Maven Group ID                      | –                 | *Any valid string*              |
+| `-DArtifactId`             | ✅ Yes        | Maven Artifact ID                   | –                 | *Any valid string*              |
+| `-DTemplate`               | ❌ No         | Type of project template            | `DEFAULT`         | `DEFAULT`, `DATABASE_JPA`       |
+| `-DSpringVersion`          | ❌ No         | Version of Spring Boot to use       | `3.1.0`           | *Any valid Spring Boot version* |
+| `-DPackageName`            | ❌ No         | Base package for the generated code | `com.example`     | *Any valid Java package name*   |
+| `-DJavaVersion`            | ❌ No         | Java version for the project        | `17`              | `8`, `11`, `17`, `21`           |
+| `-DConfigurationType`      | ❌ No         | Format of application configuration | `YAML`            | `YAML`, `PROPERTIES`            |
+| `-DCreateDockerfile`       | ❌ No         | Whether to generate a `Dockerfile`  | `N`               | `Y`, `N`                        |
 
 ### ▶️ To Run This Plugin
 
