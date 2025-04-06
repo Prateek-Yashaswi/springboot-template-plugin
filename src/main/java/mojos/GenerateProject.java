@@ -17,28 +17,28 @@ import validations.Validations;
 @Mojo(name = "generate", defaultPhase = LifecyclePhase.INSTALL, requiresProject = false)
 public class GenerateProject extends AbstractMojo {
 
-    @Parameter(property = "projectName", required = true)
+    @Parameter(property = "ProjectName", required = true)
     private String projectName;
 
-    @Parameter(property = "groupId", required = true)
+    @Parameter(property = "GroupId", required = true)
     private String groupId;
 
-    @Parameter(property = "artifactId", required = true)
+    @Parameter(property = "ArtifactId", required = true)
     private String artifactId;
 
-    @Parameter(property = "template", defaultValue = "DEFAULT")
+    @Parameter(property = "Template", defaultValue = "DEFAULT")
     private Templates template;
 
-    @Parameter(property = "springVersion", defaultValue = "3.1.0")
+    @Parameter(property = "SpringVersion", defaultValue = "3.1.0")
     private String springVersion;
 
-    @Parameter(property = "packageName", defaultValue = "com.example")
+    @Parameter(property = "PackageName", defaultValue = "com.example")
     private String packageName;
 
-    @Parameter(property = "javaVersion", defaultValue = "17")
+    @Parameter(property = "JavaVersion", defaultValue = "17")
     private String javaVersion;
 
-    @Parameter(property = "configurationType", defaultValue = "YAML")
+    @Parameter(property = "ConfigurationType", defaultValue = "YAML")
     private ConfigurationType configurationType;
 
     @Parameter(property = "CreateDockerfile", defaultValue = "N")
