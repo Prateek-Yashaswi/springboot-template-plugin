@@ -2,10 +2,7 @@ package service;
 
 import enums.Choice;
 import enums.Templates;
-import helper.ClassCreator;
-import helper.ConfigCreator;
-import helper.DockerfileCreator;
-import helper.PomCreator;
+import helper.*;
 import model.BasicProjectDetails;
 import org.apache.maven.plugin.MojoExecutionException;
 
@@ -46,6 +43,7 @@ public class ProjectService {
             PomCreator.getInstance().parsePomTemplates(basicProjectDetails, pomFile, template);
             ConfigCreator.getInstance().createApplicationConfigFile(basicProjectDetails, projectPath, template);
             ClassCreator.getInstance().generateMainClass(basicProjectDetails, javaPath);
+            PackageCreator.getInstance().createFolderStructure(javaPath);
 
             if (createDockerFile.equals(Choice.Y)) {
                 dockerfileCreator.createDockerfile(projectPath, basicProjectDetails);
