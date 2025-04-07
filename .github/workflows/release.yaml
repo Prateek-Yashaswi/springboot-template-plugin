@@ -25,15 +25,6 @@ jobs:
       - name: Import GPG key
         run: |
           echo "$GPG_PRIVATE_KEY" | gpg --batch --yes --import
-
-          echo "📦 Listing secret keys:"
-          gpg --list-secret-keys --keyid-format=long
-
-          KEY_ID=$(gpg --list-secret-keys --with-colons | awk -F: '/^sec/ { print $5 }')
-
-          echo "🔐 Setting trust level for key: $KEY_ID"
-
-          echo -e "5\ny\n" | gpg --batch --yes --command-fd 0 --edit-key "$KEY_ID" trust
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
 
