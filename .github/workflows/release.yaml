@@ -25,6 +25,10 @@ jobs:
       - name: Import GPG key
         run: |
           echo "$GPG_PRIVATE_KEY" | gpg --batch --yes --import
+          echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
+          echo "use-agent" >> ~/.gnupg/gpg.conf
+          echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
+          gpgconf --kill gpg-agent
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
 
@@ -38,4 +42,6 @@ jobs:
               .github/resources/settings-template.xml > ~/.m2/settings.xml
 
       - name: Build and Deploy
-        run: mvn -B clean deploy
+        run: mvn -B clean deploy -Dgpg.passphrase="${GPG_PASSPHRASE}"
+        env:
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}

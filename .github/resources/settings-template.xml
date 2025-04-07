@@ -13,6 +13,7 @@
                 <gpg.executable>gpg</gpg.executable>
                 <gpg.keyname>{{GPG_KEY_NAME}}</gpg.keyname>
                 <gpg.passphrase>{{GPG_PASSPHRASE}}</gpg.passphrase>
+                <gpg.pinentry-mode>loopback</gpg.pinentry-mode>
             </properties>
         </profile>
     </profiles>
