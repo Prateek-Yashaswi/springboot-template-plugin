@@ -35,7 +35,7 @@ jobs:
               -e "s|{{MAVEN_CENTRAL_PASSWORD}}|${{ secrets.MAVEN_CENTRAL_PASSWORD }}|g" \
               -e "s|{{GPG_PRIVATE_KEY}}|${{ secrets.GPG_PRIVATE_KEY }}|g" \
               -e "s|{{GPG_PASSPHRASE}}|${{ secrets.GPG_PASSPHRASE }}|g" \
-          .github/settings-template.xml > ~/.m2/settings.xml
+          .github/resources/settings-template.xml > ~/.m2/settings.xml
 
       - name: Build and Deploy
         run: mvn -B clean deploy
