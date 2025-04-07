@@ -21,12 +21,26 @@ jobs:
           java-version: '17'
           cache: "maven"
 
+      - name: Import GPG key
+        run: |
+          echo "$GPG_PRIVATE_KEY" | gpg --batch --yes --import
+          echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
+          echo "use-agent" >> ~/.gnupg/gpg.conf
+          echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
+          gpgconf --kill gpg-agent
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+
       - name: Set up Maven settings
         run: |
           mkdir -p ~/.m2
           sed -e "s|{{MAVEN_CENTRAL_USERNAME}}|${{ secrets.MAVEN_CENTRAL_USERNAME }}|g" \
-              -e "s|{{MAVEN_CENTRAL_PASSWORD}}|${{ secrets.MAVEN_CENTRAL_PASSWORD }}|g"
-          .github/resources/settings-template.xml > ~/.m2/settings.xml
+              -e "s|{{MAVEN_CENTRAL_PASSWORD}}|${{ secrets.MAVEN_CENTRAL_PASSWORD }}|g" \
+              -e "s|{{GPG_KEY_NAME}}|${{ secrets.GPG_KEY_NAME }}|g" \
+              -e "s|{{GPG_PASSPHRASE}}|${{ secrets.GPG_PASSPHRASE }}|g" \
+              .github/resources/settings-template.xml > ~/.m2/settings.xml
 
       - name: Build and Deploy
         run: mvn -B clean deploy
+        env:
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
