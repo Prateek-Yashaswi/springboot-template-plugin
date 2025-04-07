@@ -21,6 +21,8 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
           cache: "maven"
+          gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
 
       - name: Set up Maven settings
         run: |
@@ -33,6 +35,3 @@ jobs:
 
       - name: Build and Deploy
         run: mvn -B clean deploy
-        env:
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-          MAVEN_GPG_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
