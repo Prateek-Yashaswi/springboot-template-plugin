@@ -11,7 +11,7 @@
             <id>central</id>
             <properties>
                 <gpg.executable>gpg</gpg.executable>
-                <gpg.keyname>{{GPG_PRIVATE_KEY}}</gpg.keyname>
+                <gpg.keyname>{{GPG_KEY_NAME}}</gpg.keyname>
                 <gpg.passphrase>{{GPG_PASSPHRASE}}</gpg.passphrase>
             </properties>
         </profile>
