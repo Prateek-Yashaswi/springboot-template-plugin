@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - release
 
 jobs:
   release:
@@ -26,7 +27,7 @@ jobs:
           mkdir -p ~/.m2
           sed -e "s|{{MAVEN_CENTRAL_USERNAME}}|${{ secrets.MAVEN_CENTRAL_USERNAME }}|g" \
               -e "s|{{MAVEN_CENTRAL_PASSWORD}}|${{ secrets.MAVEN_CENTRAL_PASSWORD }}|g"
-          .github/resources/settings-template.xml > ~/.m2/settings.xml
+          .github/settings-template.xml > ~/.m2/settings.xml
 
       - name: Build and Deploy
         run: mvn -B clean deploy
