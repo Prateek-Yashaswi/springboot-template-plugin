@@ -40,9 +40,8 @@ public class PomCreator {
             case DATABASE_JPA -> JPA_POM_TEMPLATE_NAME;
         };
 
-        try {
+        try (var writer = new FileWriter(pomPath.toFile())) {
             var ftl = freemarkerConfig.getTemplate(templateName);
-            var writer = new FileWriter(pomPath.toFile());
             ftl.process(dataModel, writer);
         } catch (IOException | TemplateException exception) {
             throw new ProcessingException("Something went wrong while parsing pom templates", exception);
