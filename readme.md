@@ -44,6 +44,11 @@ mvn io.github.prateek-yashaswi:springboot-template-plugin:1.0:generate -DProject
 This will generate a project 'demo' with group id 'com.example' and artifact id 'demo'. The spring version that'll be
 used is 3.2.0 with the application.yaml & a dockerfile. You can remove the optional parameters if needed.
 
+## 🤝 Contributing
+
+We welcome contributions! Please check out our [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+
 ## 👨‍💻 Developer Details
 
 | Name             | Contact                                                                                                                                                     |
