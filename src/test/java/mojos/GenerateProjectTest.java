@@ -22,15 +22,15 @@ class GenerateProjectTest {
 
     private static final String PROJECT_NAME = "test-project";
     private static final String PACKAGE_NAME = "test.package";
-    private static final File SRC_DIR = new File(PROJECT_NAME + "/src");
-    private static final File DOCKERFILE_PATH = new File(PROJECT_NAME + "/dockerfile");
-    private static final File POM_PATH = new File(PROJECT_NAME + "/pom.xml");
-    private static final File MAIN_DIR = new File(PROJECT_NAME + "/src/main");
-    private static final File TEST_DIR = new File(PROJECT_NAME + "/src/test");
-    private static final File JAVA_DIR = new File(PROJECT_NAME + "/src/main/java");
-    private static final File PACKAGE_DIR = new File(PROJECT_NAME + "/src/main/java/" + PACKAGE_NAME.replace(".", "/"));
-    private static final File PROPERTIES_CONFIG = new File(PROJECT_NAME + "/src/main/resources/application.properties");
-    private static final File PROPERTIES_YAML = new File(PROJECT_NAME + "/src/main/resources/application.yaml");
+    private static final File SRC_DIR = new File(PROJECT_NAME, "/src");
+    private static final File DOCKERFILE_PATH = new File(PROJECT_NAME, "/Dockerfile");
+    private static final File POM_PATH = new File(PROJECT_NAME, "/pom.xml");
+    private static final File MAIN_DIR = new File(PROJECT_NAME, "/src/main");
+    private static final File TEST_DIR = new File(PROJECT_NAME, "/src/test");
+    private static final File JAVA_DIR = new File(PROJECT_NAME, "/src/main/java");
+    private static final File PACKAGE_DIR = new File(PROJECT_NAME ,"/src/main/java/" + PACKAGE_NAME.replace(".", "/"));
+    private static final File PROPERTIES_CONFIG = new File(PROJECT_NAME,"/src/main/resources/application.properties");
+    private static final File PROPERTIES_YAML = new File(PROJECT_NAME, "/src/main/resources/application.yaml");
 
 
     private GenerateProject mojo;
