@@ -31,32 +31,23 @@ templates, configurations, and Docker support!
 | `-DConfigurationType` | ❌ No         | Format of application configuration | `YAML`            | `YAML`, `PROPERTIES`            |
 | `-DCreateDockerfile`  | ❌ No         | Whether to generate a `Dockerfile`  | `N`               | `Y`, `N`                        |
 
-### ▶️ To Run This Plugin
+### ▶️ How to use this plugin
 
-**1️⃣ Clone The Repository** 
-
-```bash
-git clone https://github.com/Prateek-Yashaswi/springboot-template-plugin.git
-```
-
-**2️⃣ Navigate Inside The Folder**
-```bash
-cd springboot-template-plugin
-```
-
-**3️⃣ Build The Project**
-```bash
-mvn clean install
-```
+This plugin is available at [Maven Central](https://central.sonatype.com/artifact/io.github.prateek-yashaswi/springboot-template-plugin/overview)
 
 ### 📥 Example Usage
 
 ```bash
-mvn py.projects:springboot-template-plugin:1.0-SNAPSHOT:generate -DProjectName=demo -DGroupId=com.example -DArtifactId=demo -DSpringVersion=3.2.0 -DConfigurationType=YAML -DCreateDockerfile=Y
+mvn io.github.prateek-yashaswi:springboot-template-plugin:1.0:generate -DProjectName=demo -DGroupId=com.example -DArtifactId=demo -DSpringVersion=3.2.0 -DConfigurationType=YAML -DCreateDockerfile=Y
 ```
 
 This will generate a project 'demo' with group id 'com.example' and artifact id 'demo'. The spring version that'll be
-used is 3.2.0 with the application.yaml & a dockerfile.
+used is 3.2.0 with the application.yaml & a dockerfile. You can remove the optional parameters if needed.
+
+## 🤝 Contributing
+
+We welcome contributions! Please check out our [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
 
 ## 👨‍💻 Developer Details
 
