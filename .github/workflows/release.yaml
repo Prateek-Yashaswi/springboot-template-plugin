@@ -40,6 +40,9 @@ jobs:
               -e "s|{{GPG_PASSPHRASE}}|${{ secrets.GPG_PASSPHRASE }}|g" \
               .github/resources/settings-template.xml > ~/.m2/settings.xml
 
+      - name: Build & Run Tests
+        run: mvn clean install -Dgpg.skip=true # Skipping signing as it'll be done in the next step
+
       - name: Build and Deploy
         run: mvn -B clean deploy
         env:
