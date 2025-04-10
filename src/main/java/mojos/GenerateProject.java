@@ -4,6 +4,7 @@ package mojos;
 import enums.Choice;
 import enums.ConfigurationType;
 import enums.Templates;
+import model.AdditionalProjectDetails;
 import model.BasicProjectDetails;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -44,12 +45,16 @@ public class GenerateProject extends AbstractMojo {
     @Parameter(property = "CreateDockerfile", defaultValue = "N")
     private Choice createDockerfile;
 
+    @Parameter(property = "CreateSwagger", defaultValue = "N")
+    private Choice createSwagger;
+
     private final ProjectService projectService = new ProjectService();
 
     @Override
     public void execute() throws MojoExecutionException {
 
         BasicProjectDetails basicProjectDetails = new BasicProjectDetails(springVersion, projectName, groupId, artifactId, packageName, javaVersion, configurationType);
+        AdditionalProjectDetails additionalProjectDetails = new AdditionalProjectDetails(createDockerfile, createSwagger);
         Validations.getInstance().validate(basicProjectDetails);
 
         getLog().info("Generating Spring Boot Project: " + projectName);
@@ -61,7 +66,8 @@ public class GenerateProject extends AbstractMojo {
         getLog().info("Java Version: " + javaVersion);
         getLog().info("Generating application config file as: application." + configurationType.getExtension());
         getLog().info("Generating Dockerfile: " + createDockerfile.getValue());
+        getLog().info("Generating Swagger: " + createSwagger.getValue() + " | If Yes, Check Compatibility With Spring Boot Before Using");
 
-        projectService.createProjectStructure(basicProjectDetails, template, createDockerfile);
+        projectService.createProjectStructure(basicProjectDetails, template, additionalProjectDetails);
     }
 }

@@ -14,13 +14,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.Map;
 
 import static constants.PluginConstants.*;
 
 public class ConfigCreator {
 
-    private static final String DEFAULT_TEMPLATE = "/default-application";
-    private static final String JPA_TEMPLATE = "/jpa-application";
+    private static final String YAML_TEMPLATE = "/application-yaml-template.ftl";
+    private static final String PROPERTIES_TEMPLATE = "/application-properties-template.ftl";
 
     private final Configuration freemarkerConfig = FreemarkerConfig.getConfig();
 
@@ -35,10 +36,8 @@ public class ConfigCreator {
         Path configFile = projectPath.resolve(SRC + MAIN + RESOURCES + "/application." + basicProjectDetails.configurationType().getExtension());
         Files.createDirectories(configFile.getParent());
 
-        var dataModel = new HashMap<String, Object>();
-        dataModel.put(FreemarkerConstants.PROJECT_NAME, basicProjectDetails.projectName());
-
-        var templateName = getTemplateByConfigurationType(basicProjectDetails.configurationType(), configTemplate);
+        var dataModel = constructDataModel(basicProjectDetails, configTemplate);
+        var templateName = getTemplateByConfigurationType(basicProjectDetails.configurationType());
 
         try (var writer = new FileWriter(configFile.toFile())) {
             var template = freemarkerConfig.getTemplate(templateName);
@@ -48,13 +47,19 @@ public class ConfigCreator {
         }
     }
 
-    private String getTemplateByConfigurationType(ConfigurationType configurationType, Templates configTemplate) {
+    private Map<String, Object> constructDataModel(BasicProjectDetails basicProjectDetails, Templates template) {
+        Map<String, Object> dataModel = new HashMap<>();
 
-        var templateName = switch (configTemplate) {
-            case DEFAULT -> DEFAULT_TEMPLATE;
-            case DATABASE_JPA -> JPA_TEMPLATE;
+        dataModel.put(FreemarkerConstants.PROJECT_NAME, basicProjectDetails.projectName());
+        dataModel.put(FreemarkerConstants.JPA_ENABLED, template.equals(Templates.DATABASE_JPA));
+
+        return dataModel;
+    }
+
+    private String getTemplateByConfigurationType(ConfigurationType configurationType) {
+        return switch (configurationType) {
+            case YAML -> YAML_TEMPLATE;
+            case PROPERTIES -> PROPERTIES_TEMPLATE;
         };
-
-        return templateName + "-" + configurationType.getExtension() + ".ftl";
     }
 }

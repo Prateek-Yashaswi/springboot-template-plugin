@@ -61,6 +61,7 @@ class GenerateProjectTest {
         setField(mojo, "template", DEFAULT);
         setField(mojo, "configurationType", YAML);
         setField(mojo, "createDockerfile", Y);
+        setField(mojo, "createSwagger", Y);
 
         mojo.execute();
 
@@ -88,6 +89,7 @@ class GenerateProjectTest {
         setField(mojo, "template", DEFAULT);
         setField(mojo, "configurationType", YAML);
         setField(mojo, "createDockerfile", N);
+        setField(mojo, "createSwagger", Y);
 
         mojo.execute();
 
@@ -107,6 +109,7 @@ class GenerateProjectTest {
         setField(mojo, "template", DEFAULT);
         setField(mojo, "configurationType", PROPERTIES);
         setField(mojo, "createDockerfile", N);
+        setField(mojo, "createSwagger", Y);
 
         mojo.execute();
 
@@ -124,6 +127,7 @@ class GenerateProjectTest {
         setField(mojo, "template", DEFAULT);
         setField(mojo, "configurationType", YAML);
         setField(mojo, "createDockerfile", Y);
+        setField(mojo, "createSwagger", Y);
 
         mojo.execute();
 

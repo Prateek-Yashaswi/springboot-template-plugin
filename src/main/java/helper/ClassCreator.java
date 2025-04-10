@@ -24,7 +24,7 @@ public class ClassCreator {
         return new ClassCreator();
     }
 
-    private static final String MAIN_CLASS_FTL = "/main-class.ftl";
+    private static final String MAIN_CLASS_FTL = "/main-class-template.ftl";
 
     private final Configuration freemarkerConfig = FreemarkerConfig.getConfig();
 
