@@ -6,6 +6,7 @@ import enums.Templates;
 import exceptions.ProcessingException;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
+import model.AdditionalProjectDetails;
 import model.BasicProjectDetails;
 
 import java.io.FileWriter;
@@ -16,8 +17,7 @@ import java.util.Map;
 
 public class PomCreator {
 
-    private static final String DEFAULT_POM_TEMPLATE_NAME = "/default-pom.ftl";
-    private static final String JPA_POM_TEMPLATE_NAME = "/jpa-pom.ftl";
+    private static final String DEFAULT_POM_TEMPLATE_NAME = "/pom-template.ftl";
 
     private final Configuration freemarkerConfig = FreemarkerConfig.getConfig();
 
@@ -28,43 +28,29 @@ public class PomCreator {
         return new PomCreator();
     }
 
-    public void parsePomTemplates(BasicProjectDetails basicProjectDetails, Path pomPath, Templates template) {
+    public void parsePomTemplates(BasicProjectDetails basicProjectDetails, AdditionalProjectDetails additionalProjectDetails, Path pomPath, Templates template) {
 
-        var dataModel = switch (template) {
-            case DEFAULT -> getDefaultTemplateDataModel(basicProjectDetails);
-            case DATABASE_JPA -> getDatabaseTemplateDataModel(basicProjectDetails);
-        };
-
-        var templateName = switch (template) {
-            case DEFAULT -> DEFAULT_POM_TEMPLATE_NAME;
-            case DATABASE_JPA -> JPA_POM_TEMPLATE_NAME;
-        };
+        var dataModel = constructTemplateDataModel(basicProjectDetails, additionalProjectDetails, template);
 
         try (var writer = new FileWriter(pomPath.toFile())) {
-            var ftl = freemarkerConfig.getTemplate(templateName);
+            var ftl = freemarkerConfig.getTemplate(DEFAULT_POM_TEMPLATE_NAME);
             ftl.process(dataModel, writer);
         } catch (IOException | TemplateException exception) {
             throw new ProcessingException("Something went wrong while parsing pom templates", exception);
         }
     }
 
-    private Map<String, Object> getDefaultTemplateDataModel(BasicProjectDetails basicProjectDetails) {
-
+    private Map<String, Object> constructTemplateDataModel(BasicProjectDetails basicProjectDetails, AdditionalProjectDetails additionalProjectDetails, Templates template) {
         Map<String, Object> freemarkerModel = new HashMap<>();
-        addCommonData(freemarkerModel, basicProjectDetails);
 
-        return freemarkerModel;
-    }
-
-    private Map<String, Object> getDatabaseTemplateDataModel(BasicProjectDetails basicProjectDetails) {
-        return getDefaultTemplateDataModel(basicProjectDetails);
-    }
-
-    private void addCommonData(Map<String, Object> freemarkerModel, BasicProjectDetails basicProjectDetails) {
         freemarkerModel.put(FreemarkerConstants.SPRING_VERSION, basicProjectDetails.springVersion());
         freemarkerModel.put(FreemarkerConstants.ARTIFACT_ID, basicProjectDetails.artifactId());
         freemarkerModel.put(FreemarkerConstants.GROUP_ID, basicProjectDetails.groupId());
         freemarkerModel.put(FreemarkerConstants.JAVA_VERSION, basicProjectDetails.javaVersion());
         freemarkerModel.put(FreemarkerConstants.PROJECT_NAME, basicProjectDetails.projectName());
+        freemarkerModel.put(FreemarkerConstants.SWAGGER_ENABLED, additionalProjectDetails.createSwagger().getFlag());
+        freemarkerModel.put(FreemarkerConstants.JPA_ENABLED, template.equals(Templates.DATABASE_JPA));
+
+        return freemarkerModel;
     }
 }

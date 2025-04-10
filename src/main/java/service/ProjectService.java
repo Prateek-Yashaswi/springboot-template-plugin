@@ -3,6 +3,7 @@ package service;
 import enums.Choice;
 import enums.Templates;
 import helper.*;
+import model.AdditionalProjectDetails;
 import model.BasicProjectDetails;
 import org.apache.maven.plugin.MojoExecutionException;
 
@@ -21,7 +22,7 @@ public class ProjectService {
     private final DockerfileCreator dockerfileCreator = new DockerfileCreator();
 
 
-    public void createProjectStructure(BasicProjectDetails basicProjectDetails, Templates template, Choice createDockerFile) throws MojoExecutionException {
+    public void createProjectStructure(BasicProjectDetails basicProjectDetails, Templates template, AdditionalProjectDetails additionalProjectDetails) throws MojoExecutionException {
         var projectPath = Path.of(basicProjectDetails.projectName());
 
         if (Files.exists(projectPath)) {
@@ -40,12 +41,12 @@ public class ProjectService {
             Files.createDirectories(testPath);
 
             var pomFile = projectPath.resolve(POM);
-            PomCreator.getInstance().parsePomTemplates(basicProjectDetails, pomFile, template);
+            PomCreator.getInstance().parsePomTemplates(basicProjectDetails, additionalProjectDetails, pomFile, template);
             ConfigCreator.getInstance().createApplicationConfigFile(basicProjectDetails, projectPath, template);
             ClassCreator.getInstance().generateMainClass(basicProjectDetails, javaPath);
             PackageCreator.getInstance().createFolderStructure(javaPath);
 
-            if (createDockerFile.equals(Choice.Y)) {
+            if (additionalProjectDetails.createDockerFile().equals(Choice.Y)) {
                 dockerfileCreator.createDockerfile(projectPath, basicProjectDetails);
             }
 
