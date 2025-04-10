@@ -66,7 +66,7 @@ public class GenerateProject extends AbstractMojo {
         getLog().info("Java Version: " + javaVersion);
         getLog().info("Generating application config file as: application." + configurationType.getExtension());
         getLog().info("Generating Dockerfile: " + createDockerfile.getValue());
-        getLog().info("Generating Swagger: " + createSwagger.getValue());
+        getLog().info("Generating Swagger: " + createSwagger.getValue() + " | If Yes, Check Compatibility With Spring Boot Before Using");
 
         projectService.createProjectStructure(basicProjectDetails, template, additionalProjectDetails);
     }

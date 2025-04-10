@@ -19,18 +19,18 @@ templates, configurations, and Docker support!
 
 ### ⚙️ Maven Plugin Parameters
 
-| **Parameter**         | **Required** | **Description**                              | **Default Value** | **Possible Values**             |
-|-----------------------|--------------|----------------------------------------------|-------------------|---------------------------------|
-| `-DProjectName`       | ✅ Yes        | Name of the Spring Boot project              | –                 | *Any valid string*              |
-| `-DGroupId`           | ✅ Yes        | Maven Group ID                               | –                 | *Any valid string*              |
-| `-DArtifactId`        | ✅ Yes        | Maven Artifact ID                            | –                 | *Any valid string*              |
-| `-DTemplate`          | ❌ No         | Type of project template                     | `DEFAULT`         | `DEFAULT`, `DATABASE_JPA`       |
-| `-DSpringVersion`     | ❌ No         | Version of Spring Boot to use                | `3.1.0`           | *Any valid Spring Boot version* |
-| `-DPackageName`       | ❌ No         | Base package for the generated code          | `com.example`     | *Any valid Java package name*   |
-| `-DJavaVersion`       | ❌ No         | Java version for the project                 | `17`              | `8`, `11`, `17`, `21`           |
-| `-DConfigurationType` | ❌ No         | Format of application configuration          | `YAML`            | `YAML`, `PROPERTIES`            |
-| `-DCreateDockerfile`  | ❌ No         | Whether to generate a `Dockerfile`           | `N`               | `Y`, `N`                        |
-| `-DCreateSwagger`     | ❌ No         | Whether to add Swagger/OpenAPI Specification | `N`               | `Y`, `N`                        |
+| **Parameter**         | **Required** | **Description**                              | **Default Value** | **Possible Values**             | Remarks                                                      |
+|-----------------------|--------------|----------------------------------------------|-------------------|---------------------------------|--------------------------------------------------------------|
+| `-DProjectName`       | ✅ Yes        | Name of the Spring Boot project              | –                 | *Any valid string*              | None                                                         |
+| `-DGroupId`           | ✅ Yes        | Maven Group ID                               | –                 | *Any valid string*              | None                                                         |
+| `-DArtifactId`        | ✅ Yes        | Maven Artifact ID                            | –                 | *Any valid string*              | None                                                         |
+| `-DTemplate`          | ❌ No         | Type of project template                     | `DEFAULT`         | `DEFAULT`, `DATABASE_JPA`       | More To Be added soon                                        |
+| `-DSpringVersion`     | ❌ No         | Version of Spring Boot to use                | `3.1.0`           | *Any valid Spring Boot version* | We Suggest To Use Spring Boot 3.x.x for better compatibility |
+| `-DPackageName`       | ❌ No         | Base package for the generated code          | `com.example`     | *Any valid Java package name*   | None                                                         |
+| `-DJavaVersion`       | ❌ No         | Java version for the project                 | `17`              | `8`, `11`, `17`, `21`           | None                                                         |
+| `-DConfigurationType` | ❌ No         | Format of application configuration          | `YAML`            | `YAML`, `PROPERTIES`            | None                                                         |
+| `-DCreateDockerfile`  | ❌ No         | Whether to generate a `Dockerfile`           | `N`               | `Y`, `N`                        | None                                                         |
+| `-DCreateSwagger`     | ❌ No         | Whether to add Swagger/OpenAPI Specification | `N`               | `Y`, `N`                        | If Yes, Check Compatibility With Spring Boot Before Using    |
 
 ### ▶️ How to use this plugin
 
