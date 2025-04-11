@@ -12,6 +12,7 @@ templates, configurations, and Docker support!
 - ⚙️ Supports both `YAML` and `PROPERTIES` configuration formats
 - 🐳 Optional Dockerfile generation
 - 🧼 Clean package structure, modular and extensible
+- 📄 Supports Swagger/OpenAPI Specification
 
 ---
 
