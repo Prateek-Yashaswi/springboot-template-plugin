@@ -78,7 +78,7 @@ public class InputHelper {
     public ConfigurationType getConfigurationType(Console lineReader, ConfigurationType configurationType) {
         if (Objects.isNull(configurationType)) {
             var configurationInput = lineReader.readLine("Choose config type (YAML/PROPERTIES) [default: YAML]: ");
-            configurationType = configurationInput.equalsIgnoreCase("YAML") ? ConfigurationType.YAML : ConfigurationType.PROPERTIES;
+            configurationType = configurationInput.equalsIgnoreCase("PROPERTIES") ? ConfigurationType.PROPERTIES : ConfigurationType.YAML;
         }
 
         return configurationType;
