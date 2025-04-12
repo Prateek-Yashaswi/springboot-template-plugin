@@ -39,8 +39,18 @@ at [Maven Central](https://central.sonatype.com/artifact/io.github.prateek-yasha
 
 ### 📥 Example Usage
 
+You can use the plugin in two ways:
+
+1. Using Interactive Console - Use The Following Command To Run The Plugin In Interactive Mode
+
 ```bash
-mvn io.github.prateek-yashaswi:springboot-template-plugin:1.1:generate -DProjectName=demo -DGroupId=com.example -DArtifactId=demo -DSpringVersion=3.2.0 -DConfigurationType=YAML -DCreateDockerfile=Y
+mvn io.github.prateek-yashaswi:springboot-template-plugin:1.2:generate
+```
+
+2. You Can Pass -D Parameters To Pass The Parameter In The Non-Interactive Mode
+
+```bash
+mvn io.github.prateek-yashaswi:springboot-template-plugin:1.2:generate -DProjectName=demo -DGroupId=com.example -DArtifactId=demo -DSpringVersion=3.2.0 -DConfigurationType=YAML -DCreateDockerfile=Y
 ```
 
 This will generate a project 'demo' with group id 'com.example' and artifact id 'demo'. The spring version that'll be
