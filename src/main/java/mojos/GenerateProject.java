@@ -16,7 +16,6 @@ import service.ProjectService;
 import validations.Validations;
 
 import java.io.Console;
-import java.util.Objects;
 
 @SuppressWarnings("unused")
 @Mojo(name = "generate", defaultPhase = LifecyclePhase.INSTALL, requiresProject = false)
@@ -59,10 +58,6 @@ public class GenerateProject extends AbstractMojo {
     public void execute() throws MojoExecutionException {
 
         Console reader = System.console();
-
-        if (Objects.isNull(reader)) {
-            throw new MojoExecutionException("Cannot read user input: no console available. Use -D parameters for non-interactive use.");
-        }
 
         projectName = inputHelper.getProjectName(reader, projectName);
         template = inputHelper.getTemplate(reader, template);
