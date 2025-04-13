@@ -10,6 +10,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Set;
 
 import static constants.PluginConstants.*;
 
@@ -22,7 +23,7 @@ public class ProjectService {
     private final DockerfileCreator dockerfileCreator = new DockerfileCreator();
 
 
-    public void createProjectStructure(BasicProjectDetails basicProjectDetails, Templates template, AdditionalProjectDetails additionalProjectDetails) throws MojoExecutionException {
+    public void createProjectStructure(BasicProjectDetails basicProjectDetails, Set<Templates> templates, AdditionalProjectDetails additionalProjectDetails) throws MojoExecutionException {
         var projectPath = Path.of(basicProjectDetails.projectName());
 
         if (Files.exists(projectPath)) {
@@ -41,8 +42,8 @@ public class ProjectService {
             Files.createDirectories(testPath);
 
             var pomFile = projectPath.resolve(POM);
-            PomCreator.getInstance().parsePomTemplates(basicProjectDetails, additionalProjectDetails, pomFile, template);
-            ConfigCreator.getInstance().createApplicationConfigFile(basicProjectDetails, projectPath, template);
+            PomCreator.getInstance().parsePomTemplates(basicProjectDetails, additionalProjectDetails, pomFile, templates);
+            ConfigCreator.getInstance().createApplicationConfigFile(basicProjectDetails, projectPath, templates);
             ClassCreator.getInstance().generateMainClass(basicProjectDetails, javaPath);
             PackageCreator.getInstance().createFolderStructure(javaPath);
 

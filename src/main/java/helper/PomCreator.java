@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class PomCreator {
 
@@ -28,9 +29,9 @@ public class PomCreator {
         return new PomCreator();
     }
 
-    public void parsePomTemplates(BasicProjectDetails basicProjectDetails, AdditionalProjectDetails additionalProjectDetails, Path pomPath, Templates template) {
+    public void parsePomTemplates(BasicProjectDetails basicProjectDetails, AdditionalProjectDetails additionalProjectDetails, Path pomPath, Set<Templates> templates) {
 
-        var dataModel = constructTemplateDataModel(basicProjectDetails, additionalProjectDetails, template);
+        var dataModel = constructTemplateDataModel(basicProjectDetails, additionalProjectDetails, templates);
 
         try (var writer = new FileWriter(pomPath.toFile())) {
             var ftl = freemarkerConfig.getTemplate(DEFAULT_POM_TEMPLATE_NAME);
@@ -40,7 +41,7 @@ public class PomCreator {
         }
     }
 
-    private Map<String, Object> constructTemplateDataModel(BasicProjectDetails basicProjectDetails, AdditionalProjectDetails additionalProjectDetails, Templates template) {
+    private Map<String, Object> constructTemplateDataModel(BasicProjectDetails basicProjectDetails, AdditionalProjectDetails additionalProjectDetails, Set<Templates> templates) {
         Map<String, Object> freemarkerModel = new HashMap<>();
 
         freemarkerModel.put(FreemarkerConstants.SPRING_VERSION, basicProjectDetails.springVersion());
@@ -49,7 +50,7 @@ public class PomCreator {
         freemarkerModel.put(FreemarkerConstants.JAVA_VERSION, basicProjectDetails.javaVersion());
         freemarkerModel.put(FreemarkerConstants.PROJECT_NAME, basicProjectDetails.projectName());
         freemarkerModel.put(FreemarkerConstants.SWAGGER_ENABLED, additionalProjectDetails.createSwagger().getFlag());
-        freemarkerModel.put(FreemarkerConstants.JPA_ENABLED, template.equals(Templates.DATABASE_JPA));
+        freemarkerModel.put(FreemarkerConstants.JPA_ENABLED, templates.contains(Templates.DATABASE_JPA));
 
         return freemarkerModel;
     }

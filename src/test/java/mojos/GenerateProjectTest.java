@@ -15,7 +15,6 @@ import static enums.Choice.N;
 import static enums.Choice.Y;
 import static enums.ConfigurationType.PROPERTIES;
 import static enums.ConfigurationType.YAML;
-import static enums.Templates.DEFAULT;
 import static junit.framework.Assert.*;
 
 class GenerateProjectTest {
@@ -28,8 +27,8 @@ class GenerateProjectTest {
     private static final File MAIN_DIR = new File(PROJECT_NAME, "/src/main");
     private static final File TEST_DIR = new File(PROJECT_NAME, "/src/test");
     private static final File JAVA_DIR = new File(PROJECT_NAME, "/src/main/java");
-    private static final File PACKAGE_DIR = new File(PROJECT_NAME ,"/src/main/java/" + PACKAGE_NAME.replace(".", "/"));
-    private static final File PROPERTIES_CONFIG = new File(PROJECT_NAME,"/src/main/resources/application.properties");
+    private static final File PACKAGE_DIR = new File(PROJECT_NAME, "/src/main/java/" + PACKAGE_NAME.replace(".", "/"));
+    private static final File PROPERTIES_CONFIG = new File(PROJECT_NAME, "/src/main/resources/application.properties");
     private static final File PROPERTIES_YAML = new File(PROJECT_NAME, "/src/main/resources/application.yaml");
 
 
@@ -58,7 +57,7 @@ class GenerateProjectTest {
         setField(mojo, "springVersion", "3.1.0");
         setField(mojo, "packageName", PACKAGE_NAME);
         setField(mojo, "javaVersion", "17");
-        setField(mojo, "template", DEFAULT);
+        setField(mojo, "templates", "WEB");
         setField(mojo, "configurationType", YAML);
         setField(mojo, "createDockerfile", Y);
         setField(mojo, "createSwagger", Y);
@@ -86,7 +85,7 @@ class GenerateProjectTest {
         setField(mojo, "springVersion", "3.1.0");
         setField(mojo, "packageName", PACKAGE_NAME);
         setField(mojo, "javaVersion", "17");
-        setField(mojo, "template", DEFAULT);
+        setField(mojo, "templates", "WEB");
         setField(mojo, "configurationType", YAML);
         setField(mojo, "createDockerfile", N);
         setField(mojo, "createSwagger", Y);
@@ -106,7 +105,7 @@ class GenerateProjectTest {
         setField(mojo, "springVersion", "3.1.0");
         setField(mojo, "packageName", PACKAGE_NAME);
         setField(mojo, "javaVersion", "17");
-        setField(mojo, "template", DEFAULT);
+        setField(mojo, "templates", "WEB, DATABASE_JPA");
         setField(mojo, "configurationType", PROPERTIES);
         setField(mojo, "createDockerfile", N);
         setField(mojo, "createSwagger", Y);
@@ -124,7 +123,7 @@ class GenerateProjectTest {
         setField(mojo, "springVersion", "3.1.0");
         setField(mojo, "packageName", PACKAGE_NAME);
         setField(mojo, "javaVersion", "17");
-        setField(mojo, "template", DEFAULT);
+        setField(mojo, "templates", "WEB");
         setField(mojo, "configurationType", YAML);
         setField(mojo, "createDockerfile", Y);
         setField(mojo, "createSwagger", Y);
