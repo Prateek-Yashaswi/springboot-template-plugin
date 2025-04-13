@@ -126,7 +126,7 @@ public class InputHelper {
         }
 
         if (selectedTemplates.isEmpty()) {
-            System.out.println("No valid templates selected. Using DEFAULT.");
+            System.out.println("No valid templates selected. Using WEB.");
             return EnumSet.of(Templates.WEB);
         }
 

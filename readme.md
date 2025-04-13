@@ -8,7 +8,7 @@ templates, configurations, and Docker support!
 ## ✨ Features
 
 - ⚡ Instantly generate a Spring Boot project using `mvn` command
-- 🧱 Multiple templates (e.g. `DEFAULT`, `DATABASE_JPA`) to get started quickly
+- 🧱 Multiple templates (e.g. `WEB`, `DATABASE_JPA`) to get started quickly
 - ⚙️ Supports both `YAML` and `PROPERTIES` configuration formats
 - 🐳 Optional Dockerfile generation
 - 🧼 Clean package structure, modular and extensible
