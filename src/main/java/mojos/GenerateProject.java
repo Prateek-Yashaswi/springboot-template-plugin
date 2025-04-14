@@ -16,6 +16,7 @@ import service.ProjectService;
 import validations.Validations;
 
 import java.io.Console;
+import java.util.Set;
 
 @SuppressWarnings("unused")
 @Mojo(name = "generate", defaultPhase = LifecyclePhase.INSTALL, requiresProject = false)
@@ -30,8 +31,8 @@ public class GenerateProject extends AbstractMojo {
     @Parameter(property = "ArtifactId")
     private String artifactId;
 
-    @Parameter(property = "Template")
-    private Templates template;
+    @Parameter(property = "Templates")
+    private String templates;
 
     @Parameter(property = "SpringVersion")
     private String springVersion;
@@ -51,6 +52,8 @@ public class GenerateProject extends AbstractMojo {
     @Parameter(property = "CreateSwagger")
     private Choice createSwagger;
 
+    private Set<Templates> selectedTemplates;
+
     private final ProjectService projectService = new ProjectService();
     private final InputHelper inputHelper = new InputHelper();
 
@@ -59,8 +62,8 @@ public class GenerateProject extends AbstractMojo {
 
         Console reader = System.console();
 
+        selectedTemplates = inputHelper.getAndParseTemplates(reader, templates);
         projectName = inputHelper.getProjectName(reader, projectName);
-        template = inputHelper.getTemplate(reader, template);
         groupId = inputHelper.getGroupId(reader, groupId);
         artifactId = inputHelper.getArtifactId(reader, artifactId);
         springVersion = inputHelper.getSpringVersion(reader, springVersion);
@@ -79,7 +82,7 @@ public class GenerateProject extends AbstractMojo {
         Validations.getInstance().validate(basicProjectDetails);
 
         getLog().info("Generating Spring Boot Project: " + projectName);
-        getLog().info("Using Template: " + template);
+        getLog().info("Using Templates: " + selectedTemplates);
         getLog().info("Group ID: " + groupId);
         getLog().info("Artifact ID: " + artifactId);
         getLog().info("Spring Boot Version: " + springVersion);
@@ -89,6 +92,6 @@ public class GenerateProject extends AbstractMojo {
         getLog().info("Generating Dockerfile: " + createDockerfile.getValue());
         getLog().info("Generating Swagger: " + createSwagger.getValue() + " | If Yes, Check Compatibility With Spring Boot Before Using");
 
-        projectService.createProjectStructure(basicProjectDetails, template, additionalProjectDetails);
+        projectService.createProjectStructure(basicProjectDetails, selectedTemplates, additionalProjectDetails);
     }
 }

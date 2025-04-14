@@ -3,11 +3,12 @@ package helper;
 import enums.Choice;
 import enums.ConfigurationType;
 import enums.Templates;
+import org.apache.maven.plugin.MojoExecutionException;
 
 import java.io.Console;
-import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 public class InputHelper {
 
@@ -102,20 +103,33 @@ public class InputHelper {
         return swaggerChoice;
     }
 
-    public Templates getTemplate(Console lineReader, Templates templates) {
-        System.out.println("Possible Template Values: " + Arrays.stream(Templates.values()).map(Enum::name).collect(Collectors.joining(", ")));
+    public Set<Templates> getAndParseTemplates(Console lineReader, String templateInput) throws MojoExecutionException {
+        if (Objects.isNull(templateInput) || templateInput.isBlank()) {
+            templateInput = lineReader.readLine("Enter Templates (comma separated, WEB template is added by default): ");
 
-        if (Objects.isNull(templates)) {
-            var templateString = lineReader.readLine("Enter Template (default: DEFAULT): ");
-
-            try {
-                templates = Templates.valueOf(templateString.toUpperCase());
-            } catch (IllegalArgumentException e) {
-                System.out.println("Invalid template. Using DEFAULT.");
-                return Templates.DEFAULT;
+            if (Objects.isNull(templateInput) || templateInput.isBlank()) {
+                System.out.println("Using Default Templates");
+                return EnumSet.of(Templates.WEB);
             }
         }
 
-        return templates;
+        var selectedTemplates = EnumSet.noneOf(Templates.class);
+        selectedTemplates.add(Templates.WEB);
+        var selectedInputs = templateInput.trim().split(",");
+
+        for (var input : selectedInputs) {
+            try {
+                selectedTemplates.add(Templates.valueOf(input.trim().toUpperCase()));
+            } catch (IllegalArgumentException e) {
+                throw new MojoExecutionException("Invalid Template Name: " + input);
+            }
+        }
+
+        if (selectedTemplates.isEmpty()) {
+            System.out.println("No valid templates selected. Using WEB.");
+            return EnumSet.of(Templates.WEB);
+        }
+
+        return selectedTemplates;
     }
 }

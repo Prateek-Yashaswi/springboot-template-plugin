@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import static constants.PluginConstants.*;
 
@@ -32,11 +33,11 @@ public class ConfigCreator {
         return new ConfigCreator();
     }
 
-    public void createApplicationConfigFile(BasicProjectDetails basicProjectDetails, Path projectPath, Templates configTemplate) throws IOException {
+    public void createApplicationConfigFile(BasicProjectDetails basicProjectDetails, Path projectPath, Set<Templates> configTemplates) throws IOException {
         Path configFile = projectPath.resolve(SRC + MAIN + RESOURCES + "/application." + basicProjectDetails.configurationType().getExtension());
         Files.createDirectories(configFile.getParent());
 
-        var dataModel = constructDataModel(basicProjectDetails, configTemplate);
+        var dataModel = constructDataModel(basicProjectDetails, configTemplates);
         var templateName = getTemplateByConfigurationType(basicProjectDetails.configurationType());
 
         try (var writer = new FileWriter(configFile.toFile())) {
@@ -47,11 +48,11 @@ public class ConfigCreator {
         }
     }
 
-    private Map<String, Object> constructDataModel(BasicProjectDetails basicProjectDetails, Templates template) {
+    private Map<String, Object> constructDataModel(BasicProjectDetails basicProjectDetails, Set<Templates> templates) {
         Map<String, Object> dataModel = new HashMap<>();
 
         dataModel.put(FreemarkerConstants.PROJECT_NAME, basicProjectDetails.projectName());
-        dataModel.put(FreemarkerConstants.JPA_ENABLED, template.equals(Templates.DATABASE_JPA));
+        dataModel.put(FreemarkerConstants.JPA_ENABLED, templates.contains(Templates.DATABASE_JPA));
 
         return dataModel;
     }

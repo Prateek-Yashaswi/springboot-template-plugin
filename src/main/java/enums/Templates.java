@@ -1,6 +1,6 @@
 package enums;
 
 public enum Templates {
-    DEFAULT,
+    WEB,
     DATABASE_JPA
 }
