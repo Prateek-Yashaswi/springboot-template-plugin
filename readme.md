@@ -39,6 +39,11 @@ at [Maven Central](https://central.sonatype.com/artifact/io.github.prateek-yasha
 
 ### 📥 Example Usage
 
+Prerequisites
+
+* Java 17+ : [Get Java 17 Here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+* Maven Command Line: [Setup mvn](https://www.baeldung.com/install-maven-on-windows-linux-mac)
+
 You can use the plugin in two ways:
 
 1. Using Interactive Console - Use The Following Command To Run The Plugin In Interactive Mode
