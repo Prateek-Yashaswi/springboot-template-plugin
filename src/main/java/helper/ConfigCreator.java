@@ -53,6 +53,7 @@ public class ConfigCreator {
 
         dataModel.put(FreemarkerConstants.PROJECT_NAME, basicProjectDetails.projectName());
         dataModel.put(FreemarkerConstants.JPA_ENABLED, templates.contains(Templates.DATABASE_JPA));
+        dataModel.put(FreemarkerConstants.MAIL_ENABLED, templates.contains(Templates.MAIL));
 
         return dataModel;
     }

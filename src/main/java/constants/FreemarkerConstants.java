@@ -13,6 +13,7 @@ public class FreemarkerConstants {
     public static final String PROJECT_NAME = "projectName";
     public static final String SWAGGER_ENABLED = "swaggerEnabled";
     public static final String JPA_ENABLED = "jpaEnabled";
+    public static final String MAIL_ENABLED = "mailEnabled";
 
     public static final String PACKAGE_NAME = "packageName";
     public static final String MAIN_CLASS_FILE_NAME = "mainClassName";

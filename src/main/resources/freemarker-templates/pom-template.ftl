@@ -12,7 +12,7 @@
     <artifactId>${artifactId}</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>${projectName}</name>
-    <description>This Project Created By Springboot Template Plugin: ©️ Prateek Yashaswi</description>
+    <description>This Project Created By Springboot Template Plugin: https://github.com/Prateek-Yashaswi/springboot-template-plugin</description>
 
     <properties>
         <java.version>${javaVersion}</java.version>
@@ -39,6 +39,12 @@
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.6.0</version>
+        </dependency>
+        </#if>
+        <#if mailEnabled>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
         </#if>
     </dependencies>
