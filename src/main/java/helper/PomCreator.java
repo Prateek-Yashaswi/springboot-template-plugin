@@ -51,6 +51,7 @@ public class PomCreator {
         freemarkerModel.put(FreemarkerConstants.PROJECT_NAME, basicProjectDetails.projectName());
         freemarkerModel.put(FreemarkerConstants.SWAGGER_ENABLED, additionalProjectDetails.createSwagger().getFlag());
         freemarkerModel.put(FreemarkerConstants.JPA_ENABLED, templates.contains(Templates.DATABASE_JPA));
+        freemarkerModel.put(FreemarkerConstants.MAIL_ENABLED, templates.contains(Templates.MAIL));
 
         return freemarkerModel;
     }

@@ -2,5 +2,6 @@ package enums;
 
 public enum Templates {
     WEB,
-    DATABASE_JPA
+    DATABASE_JPA,
+    MAIL
 }
